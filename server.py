@@ -5,6 +5,8 @@ PORT        = 9999
 BUFFER_SIZE = 1024
 
 clienti_conectati = {}
+mesaje = {} #
+contor_id = 1
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 server_socket.bind((HOST, PORT))
@@ -42,8 +44,16 @@ while True:
             else:
                 raspuns = "EROARE: Nu esti conectat la server."
 
+        elif adresa_client not in clienti_conectati:
+            raspuns = "EROARE: Trebuie sa fii conectat pentru a folosi aceasta comanda."
+
         elif comanda == 'PUBLISH':
-            raspuns = "EROARE: Comanda PUBLISH nu este inca implementata."
+            if not argumente:
+                raspuns = "EROARE: Mesajul nu poate fi gol."
+            else:
+                mesaje[contor_id] = {"text": argumente, "autor": adresa_client}
+                raspuns = f"OK: Mesaj publicat cu ID={contor_id}"
+                contor_id += 1
 
         elif comanda == 'DELETE':
             raspuns = "EROARE: Comanda DELETE nu este inca implementata."
