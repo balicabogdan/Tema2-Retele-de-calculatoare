@@ -59,7 +59,18 @@ while True:
             raspuns = "EROARE: Comanda DELETE nu este inca implementata."
 
         elif comanda == 'LIST':
-            raspuns = "EROARE: Comanda LIST nu este inca implementata."
+            if not mesaje:
+                raspuns = "EROARE: Nu exista mesaje de afisat."
+            else:
+                text_raspuns = "OK: Lista mesaje:\n"
+                
+                for id_mesaj in mesaje:
+                    continut = mesaje[id_mesaj]
+                    text_mesaj = continut["text"]
+                    
+                    text_raspuns = text_raspuns + f"ID {id_mesaj}: {text_mesaj}\n"
+                
+                raspuns = text_raspuns
 
         else:
             raspuns = f"EROARE: Comanda '{comanda}' este necunoscuta. Comenzi valide: CONNECT, DISCONNECT, PUBLISH, DELETE, LIST"

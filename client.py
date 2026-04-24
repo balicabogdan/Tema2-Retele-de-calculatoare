@@ -64,6 +64,14 @@ while True:
             este_conectat = False
 
     elif comanda == 'PUBLISH':
+        if not este_conectat:
+            print("EROARE: Trebuie sa te conectezi inainte de a publica un mesaj. Trebuie sa folosesti CONNECT inainte de PUBLISH")
+            continue
+        
+        if len(parti) < 2:
+            print("EROARE: Comanda PUBLISH necesita un text.")
+            continue
+
         raspuns = trimite_comanda(intrare)
         print(raspuns)
 
@@ -72,6 +80,10 @@ while True:
         print(raspuns)
 
     elif comanda == 'LIST':
+        if este_conectat == False:
+            print("EROARE: Trebuie sa folosesti CONNECT inainte de LIST. Nu esti conectat la server.")
+            continue
+
         raspuns = trimite_comanda(intrare)
         print(raspuns)
 
