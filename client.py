@@ -76,6 +76,18 @@ while True:
         print(raspuns)
 
     elif comanda == 'DELETE':
+        if not este_conectat:
+            print("EROARE: Trebuie sa te conectezi inainte de a sterge ceva.")
+            continue
+            
+        if len(parti) < 2:
+            print("EROARE: Utilizare corecta: DELETE <id>")
+            continue
+            
+        if parti[1].isdigit() == False:
+            print("EROARE: ID-ul furnizat trebuie sa fie un numar intreg.")
+            continue
+
         raspuns = trimite_comanda(intrare)
         print(raspuns)
 

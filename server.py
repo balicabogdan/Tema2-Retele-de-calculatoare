@@ -56,7 +56,24 @@ while True:
                 contor_id += 1
 
         elif comanda == 'DELETE':
-            raspuns = "EROARE: Comanda DELETE nu este inca implementata."
+            if not argumente:
+                raspuns = "EROARE: Trebuie sa specifici ID-ul mesajului pentru stergere."
+            
+            else:
+                try:
+                    id_numeric = int(argumente)
+                    
+                    if id_numeric in mesaje:
+                        if mesaje[id_numeric]["autor"] == adresa_client:
+                            del mesaje[id_numeric]
+                            raspuns = f"OK: Mesajul cu ID {id_numeric} a fost sters."
+                        else:
+                            raspuns = "EROARE: Nu poti sterge acest mesaj deoarece nu esti autorul."
+                    else:
+                        raspuns = f"EROARE: Mesajul cu ID {id_numeric} nu a fost gasit."
+                
+                except ValueError:
+                    raspuns = "EROARE: ID-ul trebuie sa fie un numar intreg."
 
         elif comanda == 'LIST':
             if not mesaje:
